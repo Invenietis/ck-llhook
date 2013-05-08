@@ -1,0 +1,15 @@
+EXPORTS
+	
+	DeactivateAllHooks
+
+	GetMouseHookTarget
+	ActivateMouseHook
+	
+	GetKeyboardHookTarget
+	ActivateKeyboardHook
+	
+	GetShellHookTarget
+	ActivateShellHook
+
+SECTIONS
+	.shared   READ WRITE SHARED
