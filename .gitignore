@@ -14,11 +14,13 @@ TestResults
 *.sln.docstates
 
 # Build results
+Intermediate/
 [Dd]ebug/
 [Rr]elease/
 x64/
 *_i.c
 *_p.c
+*.lib
 *.ilk
 *.meta
 *.obj
@@ -33,6 +35,7 @@ x64/
 *.tlh
 *.tmp
 *.log
+*.tlog
 *.vspscc
 *.vssscc
 .builds

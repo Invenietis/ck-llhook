@@ -8,26 +8,26 @@ Goals was: light, fast (minimize impacts on application). Small is always beauti
 This project is part of http://www.civikey.fr/.
 
 CK.MiniCRT
-=========
+----------
 
 This ridiculous native size (and great benefits of zero-dependencyies requirements) is achieved thanks to the 
 CK.MiniCRT sub project (included in this repository but with its own solution file).
 This Mini CRT is based upon Libctiny written by Matt Pietrick in 1996!
 
-I'm not the only one that is not a big fan of the standard C runtime and all the code bloat it creates. 
+I'm not a big fan of the standard C runtime and all the code bloat it contains (and creates). 
 (Honnestly, in 2013, should we continue to use strtok and its required per-thread initialization?)
 After some hours lost fighting against linking errors related to standard
-C function (atol), I decided to rewrite just what I need in C with C++ namespaces. And with my names.
+C function (atol), I decided to rewrite just what I need in C with C++ namespaces. And with my own function names.
 I will not do it again. But it's done and covers just what is needed.
 An interesting story of Tiny, Mini, etc. CRT can be found here: http://www.benshoof.org/blog/minicrt/.
 
 Last words: 
 - I did not practice C/C++ for years. Last compiler I used was named Visual C++. There is, for sure, horrible
 things in the C projects. I'd be glad to learn!
-- do not use it, unless you perfectly know what you are doing. Some really dirty things may happen to you.
+- Do not use it, unless you perfectly know what you are doing. Some really dirty things may happen to you (read the link above).
 
 Other dependencies
-==================
+------------------
 
 CK.LLHook C# assembly uses CK.Core and CK.Interop and CK.Reflection.
 These 3 packages (LGPL licence) can be obtained from the public nuget feed https://get-package.com/org/CiviKey/
@@ -35,7 +35,7 @@ These 3 packages (LGPL licence) can be obtained from the public nuget feed https
 
 
 Hooks, Processes and Dlls
-=====================
+-------------------------
 
 Currently 3 hooks are implemented (WH_SHELL, WH_KEYBOARD, WH_MOUSE) but it will be quite easy to support all of them.
 Implementations will be restricted by an important issue: the native hooks only communicate to the C# client 
@@ -50,15 +50,24 @@ local to each process uses a lock-free version check to know if it needs a resyn
 avoid a global lock here each time a hook fires).  
 
 C# side
-=======
+-------
 
 Not a lot to say. A NativeHookManager can be instanciated that exposes the hooks. Each of them can be started 
 or stopped and expose specialized .Net events.
 
 Tests, Tools & Demo
-===================
+-------------------
+
 It's not that easy to unit test windows global hooks :-(.
+And I never used CppUnit or other C++ unit testing framework (shame on me).
+
 Three identical .Net applications exist (ViewHookApp32, ViewHookApp64 and ViewHookAppAnyCPU) that can start/stop the 
 hooks and displays their events.
+
+To build the solution, one need first to build CK.MiniCRT/CK.MiniCRT.sln (an independant solution) in all flavors (Debug/Release x 32/64 bits).
+Use menu BUILD -> Batch Build... -> Select All -> Rebuild
+
+Once done, open CK.LLHook/CK.LLHook.sln and do the same (menu BUILD -> Batch Build... -> Select All -> Rebuild).
+You can now run of the 3 test applications ((ViewHookApp32, ViewHookApp64 or ViewHookAppAnyCPU).
 
 
