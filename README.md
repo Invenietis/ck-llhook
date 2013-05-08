@@ -34,19 +34,20 @@ These 3 packages (LGPL licence) can be obtained from the public nuget feed https
 (nuget feed: https://get-package.net/feed/CiviKey/feed-CiviKey).
 
 
-Hooks, Processesn Dlls
+Hooks, Processes and Dlls
 =====================
 
 Currently 3 hooks are implemented (WH_SHELL, WH_KEYBOARD, WH_MOUSE) but it will be quite easy to support all of them.
 Implementations will be restricted by an important issue: the native hooks only communicate to the C# client 
 via PostMessage, without any provision for marshalling extra data (the information must fit in WParam &amp; LParam).
 The fact that the hooks use PostMessage is good (there is no useless intermediate threads betwwen the hook 
-and the WPF/WindowsForms Gui thread). What is bad:  a mapped file that stores extra-data information is
-missing. It should be not too complicated to implement (and very efficient since I think a nearly lock-free 
-mechanism can be achieved - it is a kind of FIFO).
+and the WPF/WindowsForms Gui thread). What is bad: a mapped file that stores extra-data information is
+missing. It should be not too complicated to implement (and very efficient since we need a kind of FIFO).
 
-Another important point: a shared section is used to store the hook identifiers, the target window and optional 
-per-hook options (options are not currently implemented).
+Important point: a shared section is used to store the hook identifiers, the target window and optional 
+per-hook options (options are not currently implemented). This section is protected by a Mutex (hook configuration
+local to each process uses a lock-free version check to know if it needs a resynchronization - I really wanted to 
+avoid a global lock here each time a hook fires).  
 
 C# side
 =======
