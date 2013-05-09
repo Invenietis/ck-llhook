@@ -1,4 +1,26 @@
-﻿using System;
+﻿#region LGPL License
+/*----------------------------------------------------------------------------
+* This file (CK.LLHook\INativeMouseHook.cs) is part of CiviKey. 
+*  
+* CiviKey is free software: you can redistribute it and/or modify 
+* it under the terms of the GNU Lesser General Public License as published 
+* by the Free Software Foundation, either version 3 of the License, or 
+* (at your option) any later version. 
+*  
+* CiviKey is distributed in the hope that it will be useful, 
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+* GNU Lesser General Public License for more details. 
+* You should have received a copy of the GNU Lesser General Public License 
+* along with CiviKey.  If not, see <http://www.gnu.org/licenses/>. 
+*  
+* Copyright © 2007-2013, 
+*     Invenietis <http://www.invenietis.com>,
+* All rights reserved. 
+*-----------------------------------------------------------------------------*/
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,6 +85,9 @@ namespace CK.Windows
         DblClick = 3
     }
 
+    /// <summary>
+    /// Describes a mouse button event. 
+    /// </summary>
     public class NativeMouseButtonEventArgs : EventArgs
     {
         /// <summary>
@@ -87,11 +112,13 @@ namespace CK.Windows
         }
     }
 
+    /// <summary>
+    /// Describes a mouse wheel event (<see cref="Delta"/>).
+    /// </summary>
     public class NativeMouseWheelEventArgs : EventArgs
     {
         /// <summary>
-        /// The delta of the wheel.
-        /// When a click occured, it is 0.
+        /// The delta of the wheel. Can be positive or negative.
         /// </summary>
         public readonly int Delta;
 
@@ -100,15 +127,29 @@ namespace CK.Windows
             Delta = delta;
         }
 
+        /// <summary>
+        /// Overriden to display the <see cref="Delta"/>.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return String.Format( "Wheel delta: {0}", Delta );
         }
     }
 
+    /// <summary>
+    /// Exposes the 2 events <see cref="NativeMouseButtonEventArgs"/> and <see cref="NativeMouseWheelEventArgs"/>.
+    /// </summary>
     public interface INativeMouseHook : INativeGlobalHook
     {
+        /// <summary>
+        /// Fires for button actions.
+        /// </summary>
         event EventHandler<NativeMouseButtonEventArgs> ButtonAction;
+        
+        /// <summary>
+        /// Fires wheel event.
+        /// </summary>
         event EventHandler<NativeMouseWheelEventArgs> WheelAction;
     }
 }

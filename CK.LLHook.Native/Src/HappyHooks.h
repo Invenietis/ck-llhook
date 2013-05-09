@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------
-* This file (CK.LLHook\CK.MiniCRT\Src\CK.Convert.h) is part of CiviKey. 
+* This file (CK.LLHook.Native\Src\HappyHooks.h) is part of CiviKey. 
 *  
 * CiviKey is free software: you can redistribute it and/or modify 
 * it under the terms of the GNU Lesser General Public License as published 
@@ -18,13 +18,36 @@
 * All rights reserved. 
 *-----------------------------------------------------------------------------*/
 
-#pragma once
+#include <Windows.h>
 
-namespace CK
+/*
+	Base structure of all hook options.
+*/
+typedef struct CommonHookOption
 {
-	namespace Convert
-	{
-		int DecimalStringToInt( const char* str );
-		int DecimalStringToInt( const wchar_t* str );
-	}
-}
+	BOOL RawIntercept;
+
+} CommonHookOption;
+
+extern void WINAPI GetBasicLogFileName( WCHAR* nameMaxPath );
+
+extern void WINAPI DeactivateAllHooks();
+
+extern HWND WINAPI GetKeyboardHookTarget();
+
+extern BOOL WINAPI ActivateKeyboardHook( HWND targetWnd );
+
+extern HWND WINAPI GetMouseHookTarget();
+
+extern BOOL WINAPI ActivateMouseHook( HWND targetWnd );
+
+extern HWND WINAPI GetShellHookTarget();
+
+extern BOOL WINAPI ActivateShellHook( HWND targetWnd );
+
+typedef struct ShellHookOption : public CommonHookOption
+{
+} ShellHookOption;
+
+extern BOOL WINAPI SetShellHookOptions( ShellHookOption options );
+

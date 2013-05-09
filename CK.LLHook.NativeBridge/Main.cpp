@@ -1,5 +1,22 @@
-// Main.cpp : Defines the entry point for the console application.
-//
+/*----------------------------------------------------------------------------
+* This file (CK.LLHook.NativeBridge\Main.cpp) is part of CiviKey. 
+*  
+* CiviKey is free software: you can redistribute it and/or modify 
+* it under the terms of the GNU Lesser General Public License as published 
+* by the Free Software Foundation, either version 3 of the License, or 
+* (at your option) any later version. 
+*  
+* CiviKey is distributed in the hope that it will be useful, 
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+* GNU Lesser General Public License for more details. 
+* You should have received a copy of the GNU Lesser General Public License 
+* along with CiviKey.  If not, see <http://www.gnu.org/licenses/>. 
+*  
+* Copyright © 2007-2013, 
+*     Invenietis <http://www.invenietis.com>,
+* All rights reserved. 
+*-----------------------------------------------------------------------------*/
 
 #include "stdafx.h"
 #include <stdlib.h>
@@ -100,12 +117,7 @@ int ConsoleMain( int, WCHAR** )
 				HWND h =  (HWND)DecimalStringToInt( hwnd );
 				if( h != NULL )
 				{
-					if( CompareInvariant( hook, "MOUSE" ) == 0 ) 
-					{
-						PostMessage( h, WM_APP+1, FALSE, sizeof(size_t) );
-						ActivateMouseHook( h ); 
-						PostMessage( h, WM_APP+1, TRUE, sizeof(size_t) );
-					}
+					if( CompareInvariant( hook, "MOUSE" ) == 0 ) ActivateMouseHook( h ); 
 					else if( CompareInvariant( hook, "KEYBOARD" ) == 0 ) ActivateKeyboardHook( h ); 
 					else if( CompareInvariant( hook, "SHELL" ) == 0 ) ActivateShellHook( h ); 
 				}
@@ -116,10 +128,7 @@ int ConsoleMain( int, WCHAR** )
 			char* hook = in.MoveNext();
 			if( hook != nullptr )
 			{
-				if( CompareInvariant( hook, "MOUSE" ) == 0 ) 
-				{
-						ActivateMouseHook( NULL ); 
-				}
+				if( CompareInvariant( hook, "MOUSE" ) == 0 ) ActivateMouseHook( NULL ); 
 				else if( CompareInvariant( hook, "KEYBOARD" ) == 0 ) ActivateKeyboardHook( NULL ); 
 				else if( CompareInvariant( hook, "SHELL" ) == 0 ) ActivateShellHook( NULL ); 
 			}
