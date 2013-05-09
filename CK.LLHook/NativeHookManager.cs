@@ -1,4 +1,26 @@
-﻿using System;
+﻿#region LGPL License
+/*----------------------------------------------------------------------------
+* This file (CK.LLHook\NativeHookManager.cs) is part of CiviKey. 
+*  
+* CiviKey is free software: you can redistribute it and/or modify 
+* it under the terms of the GNU Lesser General Public License as published 
+* by the Free Software Foundation, either version 3 of the License, or 
+* (at your option) any later version. 
+*  
+* CiviKey is distributed in the hope that it will be useful, 
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+* GNU Lesser General Public License for more details. 
+* You should have received a copy of the GNU Lesser General Public License 
+* along with CiviKey.  If not, see <http://www.gnu.org/licenses/>. 
+*  
+* Copyright © 2007-2013, 
+*     Invenietis <http://www.invenietis.com>,
+* All rights reserved. 
+*-----------------------------------------------------------------------------*/
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -10,6 +32,9 @@ using CK.Core;
 
 namespace CK.Windows
 {
+    /// <summary>
+    /// Encapsulates hook client.
+    /// </summary>
     public sealed partial class NativeHookManager : IDisposable
     {
         static INativeGlobalHookInterop _native;
@@ -25,7 +50,7 @@ namespace CK.Windows
         /// First message handled for all hooks is managed by HookBase
         /// to handle activation/deactivation of its hook.
         /// </summary>
-        public const int WM_APP = 0x8000;
+        const int WM_APP = 0x8000;
 
         /// <summary>
         /// Defines the start state of a hook by exposing both
@@ -136,6 +161,9 @@ namespace CK.Windows
             }
         }
 
+        /// <summary>
+        /// Gets wether this manager has been disposed.
+        /// </summary>
         public bool IsDisposed { get { return _disposed; } }
 
         void CheckDisposed()
@@ -143,11 +171,19 @@ namespace CK.Windows
             if( _disposed ) throw new ObjectDisposedException( "NativeHookManager" );
         }
 
-
+        /// <summary>
+        /// Gets the <see cref="INativeShellHook"/>.
+        /// </summary>
         public INativeShellHook ShellHook { get { return _shell; } }
 
+        /// <summary>
+        /// Gets the <see cref="INativeMouseHook"/>.
+        /// </summary>
         public INativeMouseHook MouseHook { get { return _mouse; } }
 
+        /// <summary>
+        /// Gets the <see cref="INativeKeyboardHook"/>.
+        /// </summary>
         public INativeKeyboardHook KeyboardHook { get { return _keyboard; } }
 
         class MouseHookImpl : HookBase, INativeMouseHook

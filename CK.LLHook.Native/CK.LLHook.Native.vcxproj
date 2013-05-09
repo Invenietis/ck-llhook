@@ -29,7 +29,8 @@
     <ClCompile Include="Src\Impl\KeyboardHook.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HappyHooks.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Src\HappyHooks.h" />
     <ClInclude Include="Src\BasicLog.h" />
     <ClInclude Include="Src\CriticalLogError.h" />
     <ClInclude Include="Src\SendInfo.h" />
@@ -38,6 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Exports.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A9CBEF8C-5AF3-4EF0-B800-7568B5A37420}</ProjectGuid>
@@ -128,6 +132,7 @@
       <CallingConvention>StdCall</CallingConvention>
       <PreprocessorDefinitions>TARGETFILENAME=L"$(TargetFileName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -139,6 +144,9 @@
       <TurnOffAssemblyGeneration>true</TurnOffAssemblyGeneration>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)Src\HappyHooks.h" "$(OutDir)" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -153,6 +161,7 @@
       <SmallerTypeCheck>false</SmallerTypeCheck>
       <PreprocessorDefinitions>TARGETFILENAME=L"$(TargetFileName)";_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <OmitFramePointers>false</OmitFramePointers>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -164,13 +173,16 @@
       <TurnOffAssemblyGeneration>true</TurnOffAssemblyGeneration>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)Src\HappyHooks.h" "$(OutDir)" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <ExceptionHandling>false</ExceptionHandling>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -180,6 +192,8 @@
       <PreprocessorDefinitions>NDEBUG;TARGETFILENAME=L"$(TargetFileName)";_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <StringPooling>true</StringPooling>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -193,16 +207,15 @@
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(ProjectDir)Src\HappyHooks.h" "$(OutDir)" /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <CallingConvention>StdCall</CallingConvention>
       <ExceptionHandling>false</ExceptionHandling>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -211,6 +224,8 @@
       <FloatingPointExceptions>false</FloatingPointExceptions>
       <PreprocessorDefinitions>NDEBUG;TARGETFILENAME=L"$(TargetFileName)";_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -224,8 +239,7 @@
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(ProjectDir)Src\HappyHooks.h" "$(OutDir)" /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

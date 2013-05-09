@@ -21,7 +21,7 @@ _PVFV __xc_z[] = {0};
 #pragma data_seg()
 #pragma comment(linker, "/merge:.CRT=.rdata")
 
-BEGIN_EXTERN_C
+extern "C" {
 
 void _initterm(_PVFV *pfbegin, _PVFV *pfend)
 {
@@ -79,4 +79,4 @@ int _purecall()
 	ExitProcess((UINT)-1);
 }
 
-END_EXTERN_C
+}

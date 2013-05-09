@@ -18,9 +18,7 @@ extern "C" void __cdecl mainCRTStartup()
     _init_atexit();
     _initterm(__xc_a, __xc_z);
 
-    int ret = 0; //_tmain(argc, _argv, 0);
-
-	ret = ConsoleMain( argc, _argv );
+    int ret = ConsoleMain( argc, _argv );
 
 	_doexit();
 	_term_args();

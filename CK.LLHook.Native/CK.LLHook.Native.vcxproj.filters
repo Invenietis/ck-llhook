@@ -50,13 +50,16 @@
     <ClInclude Include="Src\SharedHooks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HappyHooks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\SendInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\BasicLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\HappyHooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -64,5 +67,10 @@
     <None Include="Src\Exports.def">
       <Filter>Source Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

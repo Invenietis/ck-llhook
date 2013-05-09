@@ -43,8 +43,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HookCommon.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="KeyboardHook.cs">
       <SubType>UserControl</SubType>

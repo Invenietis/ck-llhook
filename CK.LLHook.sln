@@ -29,6 +29,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CK.LLHook.NativeBridge", "C
 		{A9CBEF8C-5AF3-4EF0-B800-7568B5A37420} = {A9CBEF8C-5AF3-4EF0-B800-7568B5A37420}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Items", "Shared Items", "{25BE790E-E7C7-4C2F-8F26-4F9C351173A5}"
+	ProjectSection(SolutionItems) = preProject
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

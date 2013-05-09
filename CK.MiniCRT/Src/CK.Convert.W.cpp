@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------
-* This file (CK.LLHook\CK.MiniCRT\Src\CK.Convert.h) is part of CiviKey. 
+* This file (CK.LLHook\CK.MiniCRT\Src\CK.Convert.W.h) is part of CiviKey. 
 *  
 * CiviKey is free software: you can redistribute it and/or modify 
 * it under the terms of the GNU Lesser General Public License as published 
@@ -18,13 +18,24 @@
 * All rights reserved. 
 *-----------------------------------------------------------------------------*/
 
-#pragma once
+#include "stdafx.h"
+#include "CK.Convert.h"
+#include "CK.Char.h"
 
-namespace CK
+int CK::Convert::DecimalStringToInt( const wchar_t* str )
 {
-	namespace Convert
-	{
-		int DecimalStringToInt( const char* str );
-		int DecimalStringToInt( const wchar_t* str );
-	}
+	wchar_t cur = *str++;
+	// Save the negative sign, if it exists.
+    wchar_t neg = cur;
+    if( cur == '-' || cur == '+' ) cur = *str++;
+
+    // While digits, sum.
+	int total = 0;
+    while( CK::Char::IsDigit( cur ) )
+    {
+        total = 10*total + (cur-'0');			
+        cur = *str++;					
+    }
+	return neg == '-' ? -total : total;
 }
+
